@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import {Header} from "./componets/Header";
+import {Main} from "./componets/Main";
+import {Footer} from "./componets/Footer";
+import {Card} from "./componets/Card";
+import useFetch from "./hooks/useFetch";
+import {ICharacter} from "./types/character";
+import {Toggle} from "./componets/Toggle";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const { data, error, } = useFetch<{ results:ICharacter[] }>('https://swapi.dev/api/people/')
+    return (<>
+            <Header/>
+            <Main>
+                <ul className={'card-list'}>
+                    {data?.results.map(({name,height}: ICharacter) => <Card key={name} name={name} height={height}/>)}
+                    {!data && <p className={'loading'}>Loading...</p>}
+                </ul>
+            </Main>
+
+            <Footer>
+                <Toggle/>
+            </Footer>               <Footer/>
+        </>
+    )
 }
 
 export default App;

@@ -1,0 +1,117 @@
+:root {
+  --black:#111;
+  --black-secondary:#333333;
+  --grey:#BBBBBB;
+  --green:#00FFA7;
+  --white:#fff;
+  --dark-secondary:#747474;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+*{
+  box-sizing: border-box;
+}
+body {
+  background-color: #000;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+.header{
+  background-color: var(--black);
+  padding: 16px;
+}
+.loading{
+  font-size: 40px;
+  color: white;
+}
+.content--wrapper{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+.filter{
+  border: none  ;
+  width: 100%;
+  border-radius: 8px;
+  background-color: var(--black-secondary);
+  padding: 13px 20px;
+  color: var(--grey);
+  font-size: 18px;
+  line-height: 22px;
+}
+.main{
+  padding:20px;
+  height: calc(100vh - 160px);
+}
+.card{
+  min-width: 135px;
+  overflow: hidden;
+  border-radius: 8px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.card-body{
+  color:var(--white);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  background-color: #222;
+  padding: 35px 29px;
+  text-align: center;
+}
+.card-footer{
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  background-color: var(--black);
+  padding: 8px;
+  color: var(--green);
+}
+.card-list{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+
+}
+.switch{
+  cursor: pointer;
+  border:none;
+  background-color:var(--dark-secondary);
+  border-radius: 15px;
+  width: 40px;
+  padding: 2px;
+  transition: .2s background-color ease-in-out;
+
+  &.active {
+    background-color: var(--green);
+
+    .switch-knob{
+      transform: translateX(20px);
+    }
+  }
+  &-knob{
+    transition: .2s transform ease-in-out;
+    background-color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+
+  }
+}
+
