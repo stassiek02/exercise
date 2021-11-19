@@ -18,7 +18,6 @@ export function useFetch<T = unknown>(
 ): State<T> {
   const cache = useRef<Cache<T>>({});
 
-  // Used to prevent state update if the component is unmounted
   const cancelRequest = useRef<boolean>(false);
 
   const initialState: State<T> = {
@@ -26,7 +25,6 @@ export function useFetch<T = unknown>(
     data: undefined,
   };
 
-  // Keep state logic separated
   const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
       case "loading":

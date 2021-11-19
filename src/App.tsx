@@ -6,7 +6,7 @@ import { Footer } from "./componets/Footer";
 import { Card } from "./componets/Card";
 import { useFetch } from "./hooks/useFetch";
 import { ICharacter } from "./types/character";
-import { Toggle } from "./componets/Toggle";
+import { ToggleBtn } from "./componets/ToggleBtn";
 import {
   combineFilters,
   getAverage,
@@ -55,9 +55,8 @@ function App() {
           {!data && <p className={"loading"}>Loading...</p>}
         </ul>
       </Main>
-
       <Footer>
-        <Toggle
+        <ToggleBtn
           onToggle={setOnlyTall}
           value={onlyTall}
           label={"Include only tall"}

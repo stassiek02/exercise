@@ -4,15 +4,15 @@ type ToggleProps = {
   value: boolean;
   label: string;
 };
-export const Toggle = ({ value, onToggle, label }: ToggleProps) => {
+export const ToggleBtn = ({ value, onToggle, label }: ToggleProps) => {
   return (
     <label>
       {label}
       <button
-        className={`switch ${value ? "active" : ""}`}
+        className={`toggle ${value ? "active" : ""}`}
         onClick={() => onToggle((prev) => !prev)}
       >
-        <div className={"switch-knob"} />
+        <div className={"toggle-knob"} />
       </button>
     </label>
   );

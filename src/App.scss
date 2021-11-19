@@ -79,7 +79,7 @@ body {
   gap: 20px;
   flex-wrap: wrap;
 }
-.switch {
+.toggle {
   cursor: pointer;
   border: none;
   background-color: var(--dark-secondary);
@@ -91,7 +91,7 @@ body {
   &.active {
     background-color: var(--green);
 
-    .switch-knob {
+    .toggle-knob {
       transform: translateX(20px);
     }
   }
@@ -113,7 +113,6 @@ body {
   color: #bbbbbb;
   background-color: var(--black);
 }
-
 .height {
   color: white;
   font-weight: 700;
