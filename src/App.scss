@@ -7,12 +7,6 @@
   --dark-secondary:#747474;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 *{
   box-sizing: border-box;
 }
@@ -25,11 +19,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
-}
 .header{
   background-color: var(--black);
   padding: 16px;
@@ -41,7 +30,7 @@ code {
 .content--wrapper{
   margin: 0 auto;
   width: 100%;
-  max-width: 600px;
+  max-width: 660px;
 }
 .filter{
   border: none  ;
@@ -57,39 +46,41 @@ code {
   padding:20px;
   height: calc(100vh - 160px);
 }
-.card{
-  min-width: 135px;
+.card {
+  width: 150px;
+  height: 150px;
   overflow: hidden;
   border-radius: 8px;
   display: grid;
   grid-template-rows: 1fr auto;
+
+  &-footer {
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    background-color: var(--black);
+    padding: 8px;
+    color: var(--green);
+  }
+  &-body {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    background-color: #222;
+    padding: 35px 29px;
+    text-align: center;
+  }
 }
-.card-body{
-  color:var(--white);
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 48px;
-  background-color: #222;
-  padding: 35px 29px;
-  text-align: center;
-}
-.card-footer{
-  font-size: 14px;
-  line-height: 16px;
-  text-align: center;
-  background-color: var(--black);
-  padding: 8px;
-  color: var(--green);
-}
-.card-list{
+.list{
   margin: 0;
   padding: 0;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-
 }
 .switch{
+
   cursor: pointer;
   border:none;
   background-color:var(--dark-secondary);
@@ -97,7 +88,7 @@ code {
   width: 40px;
   padding: 2px;
   transition: .2s background-color ease-in-out;
-
+  margin-left: 20px;
   &.active {
     background-color: var(--green);
 
@@ -114,4 +105,23 @@ code {
 
   }
 }
+.footer{
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  font-size: 16px;
+  line-height: 19px;
+  color: #BBBBBB;
+  background-color: var(--black);
+}
 
+.height{
+  color: white;
+  font-weight: 700;
+}
+.box{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}

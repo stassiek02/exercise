@@ -1,7 +1,9 @@
 import React from "react";
-
-export const Header = () =><header className='header'>
+type HeaderProps = {
+  children?: React.ReactNode;
+};
+export const Header = ({children}:HeaderProps) =><header className='header'>
     <div className={'content--wrapper'}>
-            <input className={'filter'} placeholder={'Filter...'}/>
+        {children}
     </div>
 </header>

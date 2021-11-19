@@ -4,24 +4,42 @@ import {Header} from "./componets/Header";
 import {Main} from "./componets/Main";
 import {Footer} from "./componets/Footer";
 import {Card} from "./componets/Card";
-import useFetch from "./hooks/useFetch";
+import {useFetch} from "./hooks/useFetch";
 import {ICharacter} from "./types/character";
 import {Toggle} from "./componets/Toggle";
+import {combineFilters, getAverage, removeExtremeValues} from "./helpers/helpers";
 
 function App() {
+    const [onlyTall, setOnlyTall] = React.useState(false);
+    const [filterText, setFilterText] = React.useState('');
     const { data, error, } = useFetch<{ results:ICharacter[] }>('https://swapi.dev/api/people/')
+
+    const textFilter = (item:ICharacter) => {
+        return item.name.toLowerCase().includes(filterText.toLowerCase());
+    };
+    const tallFilter = ({height}:ICharacter) => {
+        return onlyTall ? parseInt(height) > 100 : true
+    };
+    const filteredData = data?.results?.filter(combineFilters(textFilter,tallFilter)) || [];
+
+    const heights = filteredData.map(({height}) => parseInt(height));
+    const averageHeight = getAverage(removeExtremeValues(heights || []));
     return (<>
-            <Header/>
-            <Main>
-                <ul className={'card-list'}>
-                    {data?.results.map(({name,height}: ICharacter) => <Card key={name} name={name} height={height}/>)}
+            <Header>
+                <input className={'filter'} name={'filter'} placeholder={'Filter...'} value={filterText} onChange={(e)=>setFilterText(e.target.value)}/>
+            </Header>
+                <Main>
+                <ul className={'list'}>
+                    {error && <div>Something went wrong</div>}
+                    {filteredData?.map(({name,height}: ICharacter) => <Card key={name} name={name} height={height}/>)}
                     {!data && <p className={'loading'}>Loading...</p>}
                 </ul>
             </Main>
 
             <Footer>
-                <Toggle/>
-            </Footer>               <Footer/>
+                <Toggle onToggle={setOnlyTall} value={onlyTall} label={'Include only tall'}/>
+                <div>Average Height: <span className={'height'}>{averageHeight.toFixed(2)}</span></div>
+            </Footer>
         </>
     )
 }

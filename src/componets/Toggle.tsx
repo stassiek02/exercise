@@ -1,10 +1,16 @@
-import {useState} from "react";
-
-export const Toggle =()=>{
-const [isToggleOn, setToggleOn] = useState(false);
+import React from "react";
+type ToggleProps = {
+  onToggle: React.Dispatch<React.SetStateAction<boolean>>
+  value: boolean;
+  label:string;
+};
+export const Toggle =({value,onToggle,label}:ToggleProps)=>{
     return (
-        <button className={`switch ${isToggleOn ? 'active' : ''}`} onClick={()=>setToggleOn(prev=>!prev)}>
-            <div className={'switch-knob'}></div>
+        <label >
+            {label}
+        <button className={`switch ${value ? 'active' : ''}`} onClick={()=>onToggle(prev=>!prev)}>
+            <div className={'switch-knob'}/>
         </button>
+        </label>
     );
 };
