@@ -1,4 +1,4 @@
 export interface ICharacter {
-    name:string,
-    height:string,
+  name: string;
+  height: string;
 }
