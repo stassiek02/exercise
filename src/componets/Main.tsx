@@ -4,7 +4,7 @@ type MainProps = {
 export const Main = ({ children }: MainProps) => {
   return (
     <main className={"main"}>
-      <div className={"content--wrapper"}>{children}</div>
+      <div className={"content-wrapper"}>{children}</div>
     </main>
   );
 };

@@ -4,7 +4,7 @@ type FooterProps = {
 };
 export const Footer = ({ children }: FooterProps) => (
   <footer className="footer">
-    <div className={"content--wrapper"}>
+    <div className={"content-wrapper"}>
       <div className={"box"}>{children}</div>
     </div>
   </footer>
