@@ -4,37 +4,29 @@ import { Header } from "./componets/Header";
 import { Main } from "./componets/Main";
 import { Footer } from "./componets/Footer";
 import { Card } from "./componets/Card";
-import { useFetch } from "./hooks/useFetch";
 import { ICharacter } from "./types/character";
 import { ToggleBtn } from "./componets/ToggleBtn";
 import {
   combineFilters,
   getAverage,
-  removeExtremeValues,
 } from "./helpers/helpers";
+import {useFetchCharacters} from "./hooks/useFetchCharacters";
 
 function App() {
   const [onlyTall, setOnlyTall] = React.useState(false);
   const [filterText, setFilterText] = React.useState("");
-  const { data, error } = useFetch<{ results: ICharacter[] }>(
-    "https://swapi.dev/api/people/"
-  );
+  const {data,error} = useFetchCharacters()
 
   const textFilter = (item: ICharacter) => {
     return item.name.toLowerCase().includes(filterText.toLowerCase());
   };
   const tallFilter = ({ height }: ICharacter) => {
-    return onlyTall ? parseInt(height) > 100 : true;
+    return onlyTall ? height > 100 : true;
   };
   const filteredCharacters =
-    data?.results?.filter(combineFilters(textFilter, tallFilter)) || [];
+    data.filter(combineFilters(textFilter, tallFilter))
 
-  const charactersHeights = filteredCharacters.map(({ height }) =>
-    parseInt(height)
-  );
-  const averageHeight = getAverage(
-    removeExtremeValues(charactersHeights || [])
-  );
+  const averageHeight = getAverage(filteredCharacters)
   return (
     <>
       <Header>
@@ -49,7 +41,7 @@ function App() {
       <Main>
         <ul className={"list"}>
           {error && <div>Something went wrong</div>}
-          {filteredCharacters?.map(({ name, height }: ICharacter) => (
+          {filteredCharacters.map(({ name, height }: ICharacter) => (
             <Card key={name} name={name} height={height} />
           ))}
           {!data && <p className={"loading"}>Loading...</p>}

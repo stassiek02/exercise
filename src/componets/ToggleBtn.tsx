@@ -1,9 +1,11 @@
 import React from "react";
+
 type ToggleProps = {
   onToggle: React.Dispatch<React.SetStateAction<boolean>>;
   value: boolean;
   label: string;
 };
+
 export const ToggleBtn = ({ value, onToggle, label }: ToggleProps) => {
   return (
     <label>
