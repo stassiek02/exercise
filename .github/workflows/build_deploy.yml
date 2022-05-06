@@ -1,0 +1,39 @@
+name: Build and Deploy App
+on: 
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Deploy App'
+        # Default value if no value is explicitly provided
+        default: ''
+        # Input has to be provided for the workflow to run
+        required: false
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Get cache 🗄️
+        uses: actions/cache@v3
+        id: cache
+        with:
+            path: '**/node_modules'
+            key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install 🔧
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - name: Build 🔧
+        run: yarn run build-storybook
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
