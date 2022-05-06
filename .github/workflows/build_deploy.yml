@@ -30,7 +30,7 @@ jobs:
         run: yarn install
 
       - name: Build 🔧
-        run: yarn run build-storybook
+        run: yarn run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.0
