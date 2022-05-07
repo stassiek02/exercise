@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type ToggleProps = {
   onToggle: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,10 +11,10 @@ export const ToggleBtn = ({ value, onToggle, label }: ToggleProps) => {
     <label>
       {label}
       <button
-        className={`toggle ${value ? "active" : ""}`}
+        className={`toggle ${value ? 'active' : ''}`}
         onClick={() => onToggle((prev) => !prev)}
       >
-        <div className={"toggle-knob"} />
+        <div className={'toggle-knob'} />
       </button>
     </label>
   );

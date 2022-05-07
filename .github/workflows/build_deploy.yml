@@ -1,5 +1,5 @@
 name: Build and Deploy App
-on: 
+on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
@@ -22,8 +22,8 @@ jobs:
         uses: actions/cache@v3
         id: cache
         with:
-            path: '**/node_modules'
-            key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install 🔧
         if: steps.cache.outputs.cache-hit != 'true'

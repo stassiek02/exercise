@@ -1,4 +1,4 @@
-import {ICharacter} from "../types/character";
+import { ICharacter } from '../types/character';
 
 type Filter<T> = (item: T) => boolean;
 export const combineFilters = <T>(...filters: Filter<T>[]): Filter<T> => {
@@ -7,7 +7,7 @@ export const combineFilters = <T>(...filters: Filter<T>[]): Filter<T> => {
   };
 };
 export const getAverage = (args: ICharacter[]): number => {
-  if(args.length === 0) {
+  if (args.length === 0) {
     return 0;
   }
   return args.reduce((acc, curr) => acc + curr.height, 0) / args.length;
