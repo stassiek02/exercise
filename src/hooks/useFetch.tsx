@@ -76,6 +76,5 @@ export function useFetch<T = unknown>(
       cancelRequest.current = true;
     };
   }, [url, options]);
-  console.log(state);
   return state;
 }
