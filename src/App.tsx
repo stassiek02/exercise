@@ -26,7 +26,8 @@ function App() {
   const filteredCharacters =
     data.filter(combineFilters(textFilter, tallFilter))
 
-  const averageHeight = getAverage(filteredCharacters)
+  const averageHeight = getAverage(filteredCharacters);
+  console.log(data);
   //todo: add white mode
   //todo: add load btn at the bottom of the page  and add loading state
   //todo: add filters

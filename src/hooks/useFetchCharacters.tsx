@@ -6,9 +6,10 @@ export const useFetchCharacters = () => {
     const { data, error } = useFetch<{ results: ICharacter[] }>(
         API_URL
     );
+
     const parsedData = data?.results.map(({ name, height }) => ({
         name,
         height: Number(height),
-    })) || [];
+    })) ?? [];
     return { data:parsedData, error };
 }

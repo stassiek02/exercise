@@ -12,6 +12,7 @@ type Action<T> =
   | { type: "fetched"; payload: T }
   | { type: "error"; payload: Error };
 
+
 export function useFetch<T = unknown>(
   url?: string,
   options?: RequestInit
@@ -25,14 +26,15 @@ export function useFetch<T = unknown>(
     data: undefined,
   };
 
+
   const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
       case "loading":
         return { ...initialState };
       case "fetched":
-        return { ...initialState, data: action.payload };
+        return { ...state, data: action.payload };
       case "error":
-        return { ...initialState, error: action.payload };
+        return { ...state, error: action.payload };
       default:
         return state;
     }
@@ -42,7 +44,6 @@ export function useFetch<T = unknown>(
 
   useEffect(() => {
     if (!url) return;
-
     const fetchData = async () => {
       dispatch({ type: "loading" });
 
@@ -75,6 +76,6 @@ export function useFetch<T = unknown>(
       cancelRequest.current = true;
     };
   }, [url, options]);
-
+  console.log(state);
   return state;
 }
