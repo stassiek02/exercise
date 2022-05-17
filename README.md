@@ -1,3 +1,4 @@
+[DEMO of the app](https://stassiek02.github.io/exercise/)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
