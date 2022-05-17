@@ -32,6 +32,11 @@ export const characterMachine = createMachine<Context, Events>({
           }),
         },
         onError: {
+          actions: assign((_ctx, event) => {
+            return {
+              error: event.data.error,
+            };
+          }),
           target: 'error',
         },
       },
