@@ -1,5 +1,6 @@
 import { assign, createMachine } from 'xstate';
 import { Context, Events } from './types';
+import { ICharacter } from '../types/character';
 
 export const characterMachine = createMachine<Context, Events>({
   id: 'characterMachine',
@@ -23,7 +24,10 @@ export const characterMachine = createMachine<Context, Events>({
           target: 'idle',
           actions: assign((_ctx, event) => {
             return {
-              characters: event.data.results,
+              characters: event.data.results.map((character: ICharacter) => ({
+                ...character,
+                height: Number(character.height),
+              })),
             };
           }),
         },

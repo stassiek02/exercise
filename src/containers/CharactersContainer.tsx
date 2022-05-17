@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { ICharacter } from '../types/character';
-import { combineFilters, getAverage } from '../helpers/helpers';
+import { combineFilters } from '../helpers/helpers';
 import { Header } from '../componets/Header';
 import { Main } from '../componets/Main';
 import { Card } from '../componets/Card';
@@ -21,7 +21,7 @@ export const CharactersContainer = () => {
     characterService.send({ type: 'FETCH_CHARACTERS' });
   }, [characterService]);
 
-  const { characters, isLoading, error } = useSelector(
+  const { characters, isLoading, error, averageHeight } = useSelector(
     characterService,
     characterSelector
   );
@@ -36,7 +36,6 @@ export const CharactersContainer = () => {
     combineFilters(textFilter, tallFilter)
   );
 
-  const averageHeight = getAverage(filteredCharacters);
   //todo: add white mode
   //todo: add load btn at the bottom of the page  and add loading state
   //todo: add filters
@@ -67,8 +66,7 @@ export const CharactersContainer = () => {
           label={'Include only tall'}
         />
         <div>
-          Average Height:{' '}
-          <span className={'height'}>{averageHeight.toFixed(2)}</span>
+          Average Height: <span className={'height'}>{averageHeight}</span>
         </div>
       </Footer>
     </>
