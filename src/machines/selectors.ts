@@ -9,7 +9,7 @@ export type CharacterDataState = State<CharacterDataMachine['context']>;
 export const characterSelector = (state: CharacterDataState) => ({
   characters: state.context.characters,
   error: state.context.error,
-  isLoading: state.matches('loading'),
+  isLoading: state.matches('api.loading'),
 });
 
 export const filteredCharactersSelector = ({

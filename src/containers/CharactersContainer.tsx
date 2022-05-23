@@ -21,6 +21,7 @@ export const CharactersContainer = () => {
     filteredCharactersSelector
   );
   const averageHeight = getAverage(filteredCharacters).toFixed(2);
+
   return (
     <CharactersList
       retryFetch={() => characterService.send({ type: 'RETRY' })}
