@@ -38,7 +38,7 @@ body {
   background-color: var(--primary);
   padding: 16px;
 }
-.loading {
+.text {
   font-size: 40px;
   color: var(--white);
 }
@@ -136,4 +136,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-content: center;
+}
+.btn{
+    background-color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    color: var(--primary);
+    font-size: 16px;
+    line-height: 19px;
+    cursor: pointer;
 }

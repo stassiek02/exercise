@@ -41,16 +41,18 @@ export const CharactersList = ({
       </Header>
       <Main>
         <ul className={'list'}>
-          {true && (
+          {error && (
             <div>
-              Something went wrong
-              <button onClick={() => retryFetch()}>Try again</button>
+              <p className={'text'}>Something went wrong</p>
+              <button onClick={() => retryFetch()} className={'btn'}>
+                Try again
+              </button>
             </div>
           )}
           {characters.map(({ name, height }: ICharacter) => (
             <Card key={name} name={name} height={height} />
           ))}
-          {isLoading && <p className={'loading'}>Loading...</p>}
+          {isLoading && <p className={'text'}>Loading...</p>}
         </ul>
       </Main>
       <Footer>
