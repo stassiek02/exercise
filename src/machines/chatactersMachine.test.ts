@@ -2,7 +2,7 @@ import { characterMachine } from './charactersMachine';
 import { interpret } from 'xstate';
 
 it('should reach loading state', () => {
-  const expectedValue = 'loading';
+  const expectedValue = 'api.loading';
   const actualState = characterMachine.transition('idle', {
     type: 'FETCH_CHARACTERS',
   });
@@ -29,9 +29,8 @@ it('should eventually reach "success"', (done) => {
   });
 
   let previusState: string | null = null;
-
   const fetchService = interpret(mockFetchMachine).onTransition((state) => {
-    if (state.matches('idle') && previusState === 'loading') {
+    if (state.matches('api.idle') && previusState === 'loading') {
       // eslint-disable-next-line jest/no-conditional-expect
       expect(state.context).toMatchInlineSnapshot(`
         Object {
@@ -42,11 +41,16 @@ it('should eventually reach "success"', (done) => {
             },
           ],
           "error": null,
+          "filters": Object {
+            "onlyTall": false,
+            "searchTerm": "",
+          },
         }
       `);
       done();
     }
-    previusState = state.value as string;
+
+    previusState = (state.value as { api: string; filter: 'string' }).api;
   });
 
   fetchService.start();
@@ -71,17 +75,21 @@ it('should eventually reach "error"', (done) => {
   let previusState: string | null = null;
 
   const fetchService = interpret(mockFetchMachine).onTransition((state) => {
-    if (state.matches('error') && previusState === 'loading') {
+    if (state.matches('api.error') && previusState === 'loading') {
       // eslint-disable-next-line jest/no-conditional-expect
       expect(state.context).toMatchInlineSnapshot(`
         Object {
           "characters": Array [],
           "error": "Error",
+          "filters": Object {
+            "onlyTall": false,
+            "searchTerm": "",
+          },
         }
       `);
       done();
     }
-    previusState = state.value as string;
+    previusState = (state.value as { api: string; filter: 'string' }).api;
   });
 
   fetchService.start();
