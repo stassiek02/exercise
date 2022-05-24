@@ -64,7 +64,6 @@ export const characterMachine = createMachine<Context, Events>({
             onDone: {
               target: 'idle',
               actions: assign((_ctx, event) => {
-                console.log(event.data);
                 return {
                   pageCount: Math.floor(event.data.count / 10) + 1,
                   characters: event.data.results.map(
