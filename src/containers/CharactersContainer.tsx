@@ -15,15 +15,21 @@ export const CharactersContainer = () => {
     characterService.send({ type: 'FETCH_CHARACTERS' });
   }, [characterService]);
 
-  const { isLoading, error } = useSelector(characterService, characterSelector);
+  const { isLoading, error, pageCount } = useSelector(
+    characterService,
+    characterSelector
+  );
   const { filteredCharacters, onlyTall, searchTerm } = useSelector(
     characterService,
     filteredCharactersSelector
   );
   const averageHeight = getAverage(filteredCharacters).toFixed(2);
-
   return (
     <CharactersList
+      pageCount={pageCount}
+      onPageChange={(page) =>
+        characterService.send({ type: 'CHANGE_PAGE', page })
+      }
       retryFetch={() => characterService.send({ type: 'RETRY' })}
       characters={filteredCharacters}
       isLoading={isLoading}

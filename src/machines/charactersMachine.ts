@@ -9,6 +9,8 @@ export const characterMachine = createMachine<Context, Events>({
   context: {
     characters: [],
     error: null,
+    page: 0,
+    pageCount: 0,
     filters: {
       onlyTall: false,
       searchTerm: '',
@@ -45,6 +47,12 @@ export const characterMachine = createMachine<Context, Events>({
       states: {
         idle: {
           on: {
+            CHANGE_PAGE: {
+              target: 'loading',
+              actions: assign({
+                page: (ctx, event) => event.page,
+              }),
+            },
             FETCH_CHARACTERS: {
               target: 'loading',
             },
@@ -56,7 +64,9 @@ export const characterMachine = createMachine<Context, Events>({
             onDone: {
               target: 'idle',
               actions: assign((_ctx, event) => {
+                console.log(event.data);
                 return {
+                  pageCount: Math.floor(event.data.count / 10) + 1,
                   characters: event.data.results.map(
                     (character: ICharacter) => ({
                       ...character,

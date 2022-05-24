@@ -10,6 +10,7 @@ export const characterSelector = (state: CharacterDataState) => ({
   characters: state.context.characters,
   error: state.context.error,
   isLoading: state.matches('api.loading'),
+  pageCount: state.context.pageCount,
 });
 
 export const filteredCharactersSelector = ({

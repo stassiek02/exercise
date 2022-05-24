@@ -1,12 +1,15 @@
+import React from 'react';
+import ReactPaginate from 'react-paginate';
 import { Header } from './Header';
 import { Main } from './Main';
 import { ICharacter } from '../types/character';
 import { Card } from './Card';
 import { Footer } from './Footer';
 import { ToggleBtn } from './ToggleBtn';
-import React from 'react';
 
 export type CharactersListProps = {
+  pageCount: number;
+  onPageChange: (page: number) => void;
   characters: ICharacter[];
   isLoading: boolean;
   error: Error | null;
@@ -18,6 +21,8 @@ export type CharactersListProps = {
   retryFetch: () => void;
 };
 export const CharactersList = ({
+  pageCount,
+  onPageChange,
   characters,
   isLoading,
   error,
@@ -55,6 +60,21 @@ export const CharactersList = ({
           {isLoading && <p className={'text'}>Loading...</p>}
         </ul>
       </Main>
+      {characters && (
+        <ReactPaginate
+          nextClassName={'btn'}
+          previousClassName={'btn'}
+          pageLinkClassName={'link'}
+          activeLinkClassName={'active'}
+          containerClassName={'pagination'}
+          breakLabel="..."
+          nextLabel="Next"
+          onPageChange={(selectedItem) => onPageChange(selectedItem.selected)}
+          pageRangeDisplayed={2}
+          pageCount={pageCount}
+          previousLabel="Previous"
+        />
+      )}
       <Footer>
         <ToggleBtn
           onToggle={() => onToggleChange()}

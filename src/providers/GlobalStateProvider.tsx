@@ -11,8 +11,10 @@ type Props = {
 export const GlobalStateProvider = (props: Props) => {
   const characterService = useInterpret(characterMachine, {
     services: {
-      fetchCharacters: () => {
-        return fetch(API_URL).then((res) => res.json());
+      fetchCharacters: (context) => {
+        return fetch(`${API_URL}?page=${context.page + 1}`).then((res) =>
+          res.json()
+        );
       },
     },
   });
